@@ -8,11 +8,24 @@
 	<string>Productivity</string>
 	<key>connections</key>
 	<dict>
+		<key>2F3BEC61-9885-4B99-A9EF-E04E009D3C61</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D72E9305-03E8-43D5-A9DE-BDD56B6564DF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>7DAD6271-E803-4D9C-ABA1-DF7DDE017C9F</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>947EE63B-B41B-45E1-AD9D-7EF08E2180A7</string>
+				<string>2F3BEC61-9885-4B99-A9EF-E04E009D3C61</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -21,24 +34,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>947EE63B-B41B-45E1-AD9D-7EF08E2180A7</key>
+		<key>D72E9305-03E8-43D5-A9DE-BDD56B6564DF</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>7FF94605-D68B-416E-B54B-D3E92960612B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>B11B132B-4A61-4C05-8F4F-2111F454E6C6</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>047FB90F-4DD1-4A90-955B-F4864089768B</string>
+				<string>7C12BC50-E71F-45EE-B4FA-1BA8BC892862</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -61,46 +61,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>blackit</string>
-				<key>subtext</key>
-				<string>Applies black to clipboard content</string>
-				<key>text</key>
-				<string>Black It</string>
-				<key>withspace</key>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{clipboard:trim}</string>
+				<key>ignoredynamicplaceholders</key>
 				<false/>
+				<key>transient</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>B11B132B-4A61-4C05-8F4F-2111F454E6C6</string>
+			<string>7C12BC50-E71F-45EE-B4FA-1BA8BC892862</string>
 			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>pbpaste &gt; la_alskdjfxmcnv9p3.py ;black -l 100 la_alskdjfxmcnv9p3.py;  cat la_alskdjfxmcnv9p3.py | pbcopy; rm la_alskdjfxmcnv9p3.py</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>047FB90F-4DD1-4A90-955B-F4864089768B</string>
-			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -136,33 +111,18 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>v</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1048576</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>7FF94605-D68B-416E-B54B-D3E92960612B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>pbpaste &gt; la_alskdjfxmcnv9p3.py ;black -l 100 la_alskdjfxmcnv9p3.py;  cat la_alskdjfxmcnv9p3.py | pbcopy; rm la_alskdjfxmcnv9p3.py</string>
+				<string>if [ $(echo '{query}' | jq empty &gt; /dev/null 2&gt;&amp;1; echo $?) -eq 0 ]; then
+  echo '{query}' | $jq_path -r | pbcopy
+else
+  echo '{query}' | $black_path --stdin-filename py.py -q - | pbcopy
+fi</string>
 				<key>scriptargtype</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>type</key>
@@ -171,51 +131,132 @@
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>947EE63B-B41B-45E1-AD9D-7EF08E2180A7</string>
+			<string>D72E9305-03E8-43D5-A9DE-BDD56B6564DF</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>json</key>
+				<string>{
+  "alfredworkflow" : {
+    "arg" : "{query}",
+    "config" : {
+    },
+    "variables" : {
+      "jq_path" : "{var:jq_path}",
+      "black_path" : "{var:black_path}"
+    }
+  }
+}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.json</string>
+			<key>uid</key>
+			<string>2F3BEC61-9885-4B99-A9EF-E04E009D3C61</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string># blackit
+
+Alfred Workflow that applies python black code style to the current selection.
+
+## Dependencies
+
+- [black](https://github.com/ambv/black)
+- Alfred w/ Powerpack
+
+## How To Use
+
+1. Select any python code
+2. Run *blackit* through alfred or hit your custom command (e. g. Cmd + Alt + Ctrl + B)
+3. The selected code will be transformed into black and pasted back over the current selection.
+
+## Binaries
+
+For your convenience:
+- **1.0** https://github.com/jancschaefer/blackit/releases/download/v1.0/blackit.alfredworkflow</string>
 	<key>uidata</key>
 	<dict>
-		<key>047FB90F-4DD1-4A90-955B-F4864089768B</key>
+		<key>2F3BEC61-9885-4B99-A9EF-E04E009D3C61</key>
 		<dict>
 			<key>xpos</key>
-			<integer>270</integer>
+			<real>235</real>
 			<key>ypos</key>
-			<integer>50</integer>
+			<real>285</real>
+		</dict>
+		<key>7C12BC50-E71F-45EE-B4FA-1BA8BC892862</key>
+		<dict>
+			<key>xpos</key>
+			<real>655</real>
+			<key>ypos</key>
+			<real>255</real>
 		</dict>
 		<key>7DAD6271-E803-4D9C-ABA1-DF7DDE017C9F</key>
 		<dict>
 			<key>xpos</key>
-			<integer>60</integer>
+			<real>55</real>
 			<key>ypos</key>
-			<integer>190</integer>
+			<real>255</real>
 		</dict>
-		<key>7FF94605-D68B-416E-B54B-D3E92960612B</key>
+		<key>D72E9305-03E8-43D5-A9DE-BDD56B6564DF</key>
 		<dict>
 			<key>xpos</key>
-			<integer>470</integer>
+			<real>355</real>
 			<key>ypos</key>
-			<integer>190</integer>
-		</dict>
-		<key>947EE63B-B41B-45E1-AD9D-7EF08E2180A7</key>
-		<dict>
-			<key>xpos</key>
-			<integer>270</integer>
-			<key>ypos</key>
-			<integer>190</integer>
-		</dict>
-		<key>B11B132B-4A61-4C05-8F4F-2111F454E6C6</key>
-		<dict>
-			<key>xpos</key>
-			<integer>50</integer>
-			<key>ypos</key>
-			<integer>50</integer>
+			<real>255</real>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>/opt/homebrew/anaconda3/bin/black</string>
+				<key>placeholder</key>
+				<string>/opt/homebrew/anaconda3/bin/black</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Set the path to the black executable. By default, the tool attempts a lookup.</string>
+			<key>label</key>
+			<string>Black Path</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>black_path</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>/opt/homebrew/anaconda3/bin/jq</string>
+				<key>placeholder</key>
+				<string>/opt/homebrew/anaconda3/bin/jq</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Set the path to the jq executable. By default, the tool attempts a lookup.</string>
+			<key>label</key>
+			<string>JQ PAth</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>jq_path</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string>1.1</string>
 	<key>webaddress</key>
 	<string>www.schae.fr</string>
 </dict>
